@@ -1,0 +1,36 @@
+<a href="/" class="btn">Home</a>
+{{#if metaPantheon}}
+<h3>Update meta pantheon {{metaPantheon.mp_id}}:</h3>
+{{else}}
+<h3>Add new Meta Pantheon:</h3>
+{{/if}}
+<form id="addbeing" action="" method="post">
+    <div class="row">
+        Name: <input type="text" name="name" value="{{metaPantheon.name}}">
+    </div>
+    <input type="submit" />
+ </form>
+<br>
+{{#if metaPantheons}}
+<h3>Current Meta pantheons:</h3>
+
+    <table>
+    <thead> 
+
+        <tr>
+            <th>mp_id</th> 
+            <th>Name</th> 
+
+    </tr></thead> 
+    <tbody>
+          {{#each metaPantheons}}
+        <tr> 
+            <td>{{mp_id}}</td> 
+            <td>{{name}}</td> 
+            <td><button onclick="deleteMetaPantheon({{mp_id}})">Delete</button></td>
+            <td><a href="/meta-pantheons/{{mp_id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table>
+{{/if}}

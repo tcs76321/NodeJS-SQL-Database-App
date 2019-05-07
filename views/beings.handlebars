@@ -1,0 +1,131 @@
+<a href="/" class="btn">Home</a>
+{{#if being}}
+<h3>Update being {{being.b_id}}:</h3>
+{{else}}
+<h3>Add new beings:</h3>
+
+{{/if}}
+<form id="addbeing" action="" method="post">
+    <div class="row">
+        Name: <input type="text" name="name" value="{{being.name}}">
+    </div>
+    <div class="row">
+        Gender: 
+        <label>
+            <input type="radio" name="gender" value="M" {{#eq 'M' being.gender}}checked{{/eq}}>
+            Male
+        </label>
+         <label>
+            <input type="radio" name="gender" value="F" {{#eq 'F' being.gender}}checked{{/eq}}>
+            Female
+        </label>
+         <label>
+            <input type="radio" name="gender" value="N" {{#eq 'N' being.gender}}checked{{/eq}}>
+            Neutered
+        </label>
+    </div>
+    <div class="row">
+        Narrative Title: <input type="text" name="narrative" value="{{being.narrative}}">
+    </div>
+    <div class="row">
+        Pantheon: 
+        <select name="pantheon">
+            <option value="">Select Pantheon</option>
+            {{#each pantheons}}
+            <option value="{{p_id}}" {{#eq p_id ../being.p_id}}selected{{/eq}}>{{pname}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="row">
+        Meta Pantheon:
+        <select name="metaPantheon">
+            <option value="">Select Meta Pantheon</option>
+            {{#each metaPantheons}}
+            <option value="{{mp_id}}" {{#eq mp_id ../being.mp_id}}selected{{/eq}}>{{name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div class="row">
+    Intra Pantheon:
+    <select name="intraPantheon">
+        <option value="">Select Intra Pantheon</option>
+        {{#each intraPantheons}}
+        <option value="{{ipa_id}}" {{#eq ipa_id ../being.ipa_id}}selected{{/eq}}>{{ipname}}</option>
+        {{/each}}
+    </select>
+    </div>
+    <div class="row">
+    Characteristics
+    <select name="characteristics" multiple>
+        {{#each characteristics}}
+        <option value="{{c_id}}" {{#lookup c_id ../beingChars}}selected{{/lookup}}>{{cname}}</option>
+        {{/each}}
+    </select>
+    </div>
+    <input type="submit" />
+ </form>
+<br>
+
+{{#unless being}}
+<h3>Current beings:</h3>
+ 
+<form id="filters" method="get">
+    <label>Gender</label>
+    <select name="gender">
+        <option value="">Select gender</option>
+        <option value="M">Male</option>
+        <option value="F">Female</option>
+        <option value="N">Neutered</option>
+    </select>
+
+    <label>Pantheon: </label>
+    <select name="pantheon">
+        <option value="">Select Pantheon</option>
+        {{#each pantheons}}
+        <option value="{{p_id}}">{{pname}}</option>
+        {{/each}}
+    </select>
+    
+    <label>Meta Pantheon:</label>
+    <select name="metaPantheon">
+        <option value="">Select Meta Pantheon</option>
+        {{#each metaPantheons}}
+        <option value="{{mp_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+
+    <label>Intra Pantheon:</label>
+    <select name="intraPantheon">
+        <option value="">Select Intra Pantheon</option>
+        {{#each intraPantheons}}
+        <option value="{{ipa_id}}">{{ipname}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit" value="Filter" />
+</form>
+<table>
+    <thead> 
+        <tr><th>Name</th> 
+        <th>Gender</th> 
+        <th>Narrative</th>
+        <th>Pantheon</th>
+        <th>Meta Pantheon</th>
+        <th>Intra Pantheon</th>
+    </tr></thead> 
+    <tbody>
+          {{#each beings}}
+        <tr> 
+            <td>{{name}}</td> 
+            <td>{{gender}}</td> 
+            <td>{{narrative}}</td> 
+            <td>{{p_id}}</td> 
+            <td>{{mp_id}}</td> 
+            <td>{{ipa_id}}</td> 
+            <td><button onclick="deleteBeing({{b_id}})">Delete</button></td>
+            <td><a href="/beings/{{b_id}}">Update/View</a></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table>
+{{/unless}}

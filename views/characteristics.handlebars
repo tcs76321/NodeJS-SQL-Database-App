@@ -1,0 +1,31 @@
+<a href="/" class="btn">Home</a>
+{{#if characteristic}}
+<h3>Update Characteristic {{c_id}}:</h3>
+{{else}}
+<h3>Add new Characteristic:</h3>
+{{/if}}
+<form id="addcharacteristics" action="" method="post">
+    <div class="row">
+        Name: <input type="text" name="cname" value="{{characteristic.cname}}">
+    </div>
+    <input type="submit" />
+ </form>
+<br>
+{{#if characteristics}}
+<h3>Current Characteristics</h3>
+
+    <table>
+    <thead> 
+        <tr><th>Name</th> 
+    </tr></thead> 
+    <tbody>
+          {{#each characteristics}}
+        <tr> 
+            <td>{{cname}}</td>  
+            <td><button onclick="deleteCharacteristics({{c_id}})">Delete</button></td>
+            <td><a href="/chars/{{c_id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table>
+{{/if}}

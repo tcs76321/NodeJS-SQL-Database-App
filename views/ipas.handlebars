@@ -1,0 +1,45 @@
+<a href="/" class="btn">Home</a>
+{{#if intraPantheon}}
+<h3>Update IPA {{ipa_id}}:</h3>
+{{else}}
+<h3>Add new IPA:</h3>
+{{/if}}
+<form id="addcharacteristics" action="" method="post">
+    <div class="row">
+        Name: <input type="text" name="ipname" value="{{intraPantheon.ipname}}">
+    </div>
+    <div class="row">
+        Pantheon: 
+        <select name="p_id">
+            <option value="">Select Pantheon</option>
+            {{#each pantheons}}
+            <option value="{{p_id}}" {{#eq p_id ../intraPantheon.p_id}}selected{{/eq}}>{{pname}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <input type="submit" />
+ </form>
+<br>
+{{#if intraPantheons}}
+<h3>Current IPAS</h3>
+
+    <table>
+    <thead> 
+        <tr>
+            <th>Id</th> 
+            <th>Name</th>
+            <th>Pantheon id</th> 
+    </tr></thead> 
+    <tbody>
+          {{#each intraPantheons}}
+        <tr> 
+            <td>{{ipa_id}}</td>
+            <td>{{ipname}}</td>
+            <td>{{p_id}}</td>  
+            <td><button onclick="deleteIntraPantheon({{ipa_id}})">Delete</button></td>
+            <td><a href="/ipas/{{ipa_id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table>
+{{/if}}

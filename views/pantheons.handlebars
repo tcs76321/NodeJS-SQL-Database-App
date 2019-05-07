@@ -1,0 +1,40 @@
+<a href="/" class="btn">Home</a>
+{{#if pantheon}}
+<h3>Update pantheon {{pantheon.p_id}}:</h3>
+{{else}}
+<h3>Add new pantheon:</h3>
+{{/if}}
+<form id="addPantheon" action="" method="post">
+    <div class="row">
+        Name: <input type="text" name="pname" value="{{pantheon.pname}}">
+    </div>
+    <div class="row">
+        Loca: <input type="text" name="loca" value="{{pantheon.loca}}">
+    </div>
+    <input type="submit" />
+ </form>
+<br>
+{{#if pantheons}}
+<h3>Current pantheons:</h3>
+
+    <table>
+    <thead> 
+        <tr>
+            <th>p_id</th>
+            <th>Name</th> 
+            <th>Loca</th> 
+        
+    </tr></thead> 
+    <tbody>
+          {{#each pantheons}}
+        <tr> 
+            <td>{{p_id}}</td> 
+            <td>{{pname}}</td> 
+            <td>{{loca}}</td> 
+            <td><button onclick="deletePantheon({{p_id}})">Delete</button></td>
+            <td><a href="/pantheons/{{p_id}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody> 
+</table>
+{{/if}}
